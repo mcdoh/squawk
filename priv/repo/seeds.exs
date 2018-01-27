@@ -1,11 +1,15 @@
-# Script for populating the database. You can run it as:
-#
-#     mix run priv/repo/seeds.exs
-#
-# Inside the script, you can read and write to any of your
-# repositories directly:
-#
-#     Squawk.Repo.insert!(%Squawk.SomeSchema{})
-#
-# We recommend using the bang functions (`insert!`, `update!`
-# and so on) as they will fail if something goes wrong.
+alias Squawk.Repo
+alias Squawk.Nest.Sqwk
+
+"priv/seed_data/words.txt"
+|> File.stream!
+|> Stream.map(fn word_line ->
+  key = String.trim_trailing word_line
+
+  if (key != "") do
+    %Sqwk{key: key}
+    |> Repo.insert!
+  end
+end)
+|> Stream.run
+
