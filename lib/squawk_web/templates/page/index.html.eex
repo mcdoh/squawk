@@ -1,4 +1,13 @@
 <div class="jumbotron">
   <h1><%= gettext "%{name}!", name: "Squawk" %></h1>
   <p class="lead">Share URLs quickly!</p>
+  <%= form_for @conn, squawk_path(@conn, :create), [as: :squawk, id: "squawk-form"], fn f -> %>
+    <div class="form-group">
+      <%= text_input f, :url, placeholder: "full url (e.g. http://squawk.online)", class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= select f, :ttl, ["5 minutes": 5, "15 minutes": 15, "30 minutes": 30, "1 hour": 60, "3 hours": 180, "6 hours": 360, "12 hours": 720, "24 hours": 1440], class: "form-control" %>
+    </div>
+    <%= submit "Squawk!", class: "btn btn-lg btn-primary btn-block" %>
+  <% end %>
 </div>

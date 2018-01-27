@@ -17,6 +17,11 @@ defmodule SquawkWeb.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+
+    get "/squawk", SquawkController, :new
+    post "/squawk", SquawkController, :create
+
+	get "/:key", SquawkController, :show
   end
 
   # Other scopes may use custom stacks.

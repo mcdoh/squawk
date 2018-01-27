@@ -1,0 +1,9 @@
+<div class="jumbotron">
+  <h2>Bogus!</h2>
+  <%= if @error == :out_of_words do %>
+    <p class="lead">We're all out of words! Please try again shortly!!</p>
+  <% else %>
+    <p class="lead"><strong><%= @key %></strong> does not link anywhere!</p>
+    <p class="lead"><%= link "Want to share a URL?", to: page_path(@conn, :index) %></p>
+  <% end %>
+</div>
