@@ -18,7 +18,6 @@ defmodule SquawkWeb.Router do
 
     get "/", PageController, :index
 
-    get "/squawk", SquawkController, :new
     post "/squawk", SquawkController, :create
 
 	get "/:key", SquawkController, :show

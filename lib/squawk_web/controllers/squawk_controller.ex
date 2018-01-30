@@ -2,10 +2,6 @@ defmodule SquawkWeb.SquawkController do
   use SquawkWeb, :controller
   alias Squawk.Nest
 
-  def new(conn, _params) do
-	render conn, "new.html", sqwk: :false
-  end
-
   def create(conn, %{"squawk" => squawk_request}) do
     IO.puts "CREATE CREATE CREATE"
 	case Nest.create_squawk(squawk_request) do
