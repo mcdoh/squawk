@@ -10,4 +10,10 @@
     </div>
     <%= submit "Squawk!", class: "btn btn-lg btn-primary btn-block" %>
   <% end %>
+  <%= if not Enum.empty?(@sqwks) do %>
+    <hr />
+    <%= for sqwk <- @sqwks do %>
+      <p><strong><%= sqwk.key %></strong>: <a href="<%= sqwk.url %>"><%= sqwk.url %></a></p>
+    <% end %>
+  <% end %>
 </div>

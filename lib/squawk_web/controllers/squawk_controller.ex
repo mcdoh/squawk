@@ -6,7 +6,12 @@ defmodule SquawkWeb.SquawkController do
     IO.puts "CREATE CREATE CREATE"
 	case Nest.create_squawk(squawk_request) do
 	  {:ok, sqwk} ->
-		render conn, "new.html", sqwk: sqwk
+        sqwks = get_session(conn, :sqwks) || []
+        sqwks = [sqwk | sqwks]
+
+        conn
+        |> put_session(:sqwks, sqwks)
+		|> render("new.html", sqwk: sqwk)
 	  {:error, error} ->
 		render conn, "error.html", error: error
 	end
