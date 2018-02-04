@@ -44,6 +44,8 @@ function squawkSuccess (data) {
 	let oldKey = document.querySelector('#new-key');
 	if (oldKey) remove(oldKey);
 
+	document.querySelector('#squawk_url').value = ''
+
 	if (!squawkBox) {
 		insertAfter(squawkForm, squawkBoxTMPL());
 		squawkBox = document.querySelector('#squawk-box');

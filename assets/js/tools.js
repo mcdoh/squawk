@@ -55,7 +55,9 @@ export function prepend(el, prependThis) {
 }
 
 export function remove (el) {
-	el.parentNode.removeChild(el);
+	if (el && el.parentNode) {
+		el.parentNode.removeChild(el);
+	}
 }
 
 export function formatTime (totalSeconds) {
