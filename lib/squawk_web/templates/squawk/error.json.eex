@@ -1,0 +1,12 @@
+<%= if @error == :out_of_words do %>
+  {
+    "error": 1,
+    "message": "out of keys"
+  }
+<% else %>
+  {
+    "error": 2,
+    "message": "no squawk",
+    "key": "<%= @key %>"
+  }
+<% end %>

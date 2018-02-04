@@ -1,0 +1,6 @@
+{
+  "expiration": <%= DateTime.to_unix @sqwk.expiration %>,
+  "key": "<%= @sqwk.key %>",
+  "squawk": "http://<%= @conn.host %><%= squawk_path(@conn, :show, @sqwk.key) %>",
+  "url": "<%= @sqwk.url %>"
+}

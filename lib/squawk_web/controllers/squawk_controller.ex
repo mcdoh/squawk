@@ -11,9 +11,9 @@ defmodule SquawkWeb.SquawkController do
 
         conn
         |> put_session(:sqwks, sqwks)
-		|> render("new.html", sqwk: sqwk)
+		|> render("new.json", sqwk: sqwk)
 	  {:error, error} ->
-		render conn, "error.html", error: error
+		render conn, "error.json", error: error
 	end
   end
 

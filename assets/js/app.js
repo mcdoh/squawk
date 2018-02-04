@@ -1,21 +1,44 @@
-// Brunch automatically concatenates all files in your
-// watched paths. Those paths can be configured at
-// config.paths.watched in "brunch-config.js".
-//
-// However, those files will only be executed if
-// explicitly imported. The only exception are files
-// in vendor, which are never wrapped in imports and
-// therefore are always executed.
+import 'phoenix_html';
+import {ONE_SECOND, createDomNode, insertAfter, onReady, postFormData} from './tools.js';
 
-// Import dependencies
-//
-// If you no longer want to use a dependency, remember
-// to also remove its path from "config.paths.watched".
-import "phoenix_html"
+let squawkForm;
 
-// Import local files
-//
-// Local files can be imported directly using relative
-// paths "./socket" or full ones "web/static/js/socket".
+function newSquawkTMPL (data) {
+	let template = `
+		<div class="new-squawk">
+			<p>Your key: <strong>${ data.key }</strong></p>
+			<p>Your link: <a href="${ data.squawk }">${ data.squawk }</a></p>
+			<p>Expires: ${ new Date(data.expiration * ONE_SECOND) }</p>
+		</div>
+	`;
 
-// import socket from "./socket"
+	return template.trim();
+}
+
+function squawkSuccess (data) {
+	let squawk = JSON.parse(data);
+	squawk = typeof squawk === 'string' ? JSON.parse(squawk) : squawk;
+
+	let squawkEl = createDomNode(newSquawkTMPL(squawk));
+
+	insertAfter(squawkForm, squawkEl[0]);
+}
+
+function squawkError (error) {
+	console.error(error);
+}
+
+function submitSquawk (event) {
+	event.preventDefault();
+
+	let postURL = this.getAttribute('action');
+	let formData = new FormData(this);
+
+	postFormData(postURL, formData, squawkSuccess, squawkError);
+}
+
+onReady(() => {
+	squawkForm = document.querySelector('#squawk-form');
+
+	squawkForm.addEventListener('submit', submitSquawk);
+});
