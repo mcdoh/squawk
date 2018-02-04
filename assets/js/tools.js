@@ -9,7 +9,14 @@ export function createDomNode (htmlString) {
 }
 
 export function insertAfter (afterThis, insertThis) {
-	afterThis.parentNode.insertBefore(insertThis, afterThis.nextSibling);
+	if (Array.isArray(insertThis)) {
+		insertThis.reverse();
+		insertThis.forEach(node => insertAfter(afterThis, node));
+		insertThis.reverse();
+	}
+	else {
+		afterThis.parentNode.insertBefore(insertThis, afterThis.nextSibling);
+	}
 }
 
 export function noop () {}
@@ -41,4 +48,12 @@ export function postFormData(url, formData, callback = noop, errorback = noop) {
 	xhr.send(formData);
 
 	return xhr;
+}
+
+export function prepend(el, prependThis) {
+	el.insertBefore(prependThis, el.childNodes[0]);
+}
+
+export function remove (el) {
+	el.parentNode.removeChild(el);
 }
