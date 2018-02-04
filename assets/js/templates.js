@@ -1,7 +1,7 @@
+import {createDomNode} from './tools.js';
 
 export function squawkBoxTMPL () {
 	let template = `
-		<hr />
 		<div id="squawk-box"></div>
 	`;
 
@@ -18,10 +18,10 @@ export function newKeyTMPL (data) {
 	return createDomNode(template.trim())[0];
 }
 
-export function squawkTMPL (data) {
+export function squawkDisplayTMPL (data) {
 	let template = `
-		<p data-expiration="${ data.expiration }">
-			<strong><a href="${ data.squawk }">${ data.key }</a></strong>: <a href="${ data.url }">${ data.url }</a><span class="squawk-expiration">1:23</span>
+		<p class="squawk-display" data-expiration="${ data.expiration }">
+			<strong><a href="${ data.squawk }">${ data.key }</a></strong>: <a href="${ data.url }">${ data.url }</a><span class="squawk-expiration"></span>
 		</p>
 	`;
 

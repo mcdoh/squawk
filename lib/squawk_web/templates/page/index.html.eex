@@ -11,11 +11,10 @@
     <%= submit "Squawk!", class: "btn btn-lg btn-primary btn-block" %>
   <% end %>
   <%= if not Enum.empty?(@sqwks) do %>
-    <hr />
     <div id="squawk-box">
       <%= for sqwk <- @sqwks do %>
-        <p data-expiration="<%= DateTime.to_unix(sqwk.expiration) * 1000 %>">
-          <strong><a href="<%= squawk_path(@conn, :show, sqwk.key) %>"><%= sqwk.key %></a></strong>: <a href="<%= sqwk.url %>"><%= sqwk.url %></a><span class="squawk-expiration">3:21</span>
+        <p class="squawk-display" data-expiration="<%= DateTime.to_unix(sqwk.expiration) * 1000 %>">
+          <strong><a href="<%= squawk_path(@conn, :show, sqwk.key) %>"><%= sqwk.key %></a></strong>: <a href="<%= sqwk.url %>"><%= sqwk.url %></a><span class="squawk-expiration"></span>
         </p>
       <% end %>
     </div>

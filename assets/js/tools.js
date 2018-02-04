@@ -57,3 +57,15 @@ export function prepend(el, prependThis) {
 export function remove (el) {
 	el.parentNode.removeChild(el);
 }
+
+export function formatTime (totalSeconds) {
+	let hours = Math.floor(totalSeconds / 3600);
+	let minutes = Math.floor(totalSeconds % 3600 / 60);
+	let seconds = Math.floor(totalSeconds % 60);
+
+	let hourDisplay = hours ? `${ hours }:` : '';
+	let minuteDisplay = hours && (minutes < 10) ? `0${ minutes }:` : `${ minutes }:`;
+	let secondDisplay = seconds < 10 ? `0${ seconds }` : seconds;
+
+	return `${ hourDisplay }${ minuteDisplay }${ secondDisplay }`;
+}
