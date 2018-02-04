@@ -1,27 +1,27 @@
 import 'phoenix_html';
-import {ONE_SECOND, createDomNode, insertAfter, onReady, postFormData} from './tools.js';
+import {createDomNode, insertAfter, onReady, postFormData, prepend, remove} from './tools.js';
+import {squawkBoxTMPL, newKeyTMPL, squawkTMPL} from './templates.js';
 
 let squawkForm;
-
-function newSquawkTMPL (data) {
-	let template = `
-		<div class="new-squawk">
-			<p>Your key: <strong>${ data.key }</strong></p>
-			<p>Your link: <a href="${ data.squawk }">${ data.squawk }</a></p>
-			<p>Expires: ${ new Date(data.expiration * ONE_SECOND) }</p>
-		</div>
-	`;
-
-	return template.trim();
-}
+let squawkBox;
 
 function squawkSuccess (data) {
 	let squawk = JSON.parse(data);
 	squawk = typeof squawk === 'string' ? JSON.parse(squawk) : squawk;
 
-	let squawkEl = createDomNode(newSquawkTMPL(squawk));
+	let newKeyEl = newKeyTMPL(squawk);
+	let squawkEl = squawkTMPL(squawk);
 
-	insertAfter(squawkForm, squawkEl[0]);
+	let oldKey = document.querySelector('#new-key');
+	if (oldKey) remove(oldKey);
+
+	if (!squawkBox) {
+		insertAfter(squawkForm, squawkBoxTMPL());
+		squawkBox = document.querySelector('#squawk-box');
+	}
+
+	insertAfter(squawkForm, newKeyEl);
+	prepend(squawkBox, squawkEl);
 }
 
 function squawkError (error) {
@@ -39,6 +39,7 @@ function submitSquawk (event) {
 
 onReady(() => {
 	squawkForm = document.querySelector('#squawk-form');
+	squawkBox = document.querySelector('#squawk-box');
 
 	squawkForm.addEventListener('submit', submitSquawk);
 });

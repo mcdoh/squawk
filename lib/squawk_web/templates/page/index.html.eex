@@ -12,8 +12,12 @@
   <% end %>
   <%= if not Enum.empty?(@sqwks) do %>
     <hr />
-    <%= for sqwk <- @sqwks do %>
-      <p><strong><%= sqwk.key %></strong>: <a href="<%= sqwk.url %>"><%= sqwk.url %></a></p>
-    <% end %>
+    <div id="squawk-box">
+      <%= for sqwk <- @sqwks do %>
+        <p data-expiration="<%= DateTime.to_unix(sqwk.expiration) * 1000 %>">
+          <strong><a href="<%= squawk_path(@conn, :show, sqwk.key) %>"><%= sqwk.key %></a></strong>: <a href="<%= sqwk.url %>"><%= sqwk.url %></a><span class="squawk-expiration">3:21</span>
+        </p>
+      <% end %>
+    </div>
   <% end %>
 </div>
