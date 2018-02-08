@@ -1,10 +1,15 @@
 import 'phoenix_html';
-import {ONE_SECOND, createDomNode, insertAfter, formatTime, onReady, postFormData, prepend, remove} from './tools.js';
+import {ONE_SECOND, copyToClipboard, createDomNode, insertAfter, formatTime, onReady, postFormData, prepend, remove} from './tools.js';
 import {squawkBoxTMPL, newKeyTMPL, squawkDisplayTMPL} from './templates.js';
 
 let squawkForm;
 let squawkBox;
 let squawkURL;
+
+function squawkCopy (squawkDisplay) {
+	let squawk = squawkDisplay.getAttribute('data-squawk');
+	squawkDisplay.addEventListener('click', () => copyToClipboard(squawk));
+}
 
 function squawkCountdown (squawkDisplay) {
 	let expiration = parseInt(squawkDisplay.getAttribute('data-expiration'));
@@ -35,6 +40,11 @@ function squawkCountdown (squawkDisplay) {
 	sqwkCountdown();
 }
 
+function wireUpSquawkDisplay (squawkDisplay) {
+	squawkCopy(squawkDisplay);
+	squawkCountdown(squawkDisplay);
+}
+
 function squawkSuccess (data) {
 	let squawk = JSON.parse(data);
 	squawk = typeof squawk === 'string' ? JSON.parse(squawk) : squawk;
@@ -55,7 +65,7 @@ function squawkSuccess (data) {
 	insertAfter(squawkForm, newKey);
 	prepend(squawkBox, squawkDisplay);
 
-	squawkCountdown(squawkDisplay);
+	wireUpSquawkDisplay(squawkDisplay);
 }
 
 function squawkError (error) {
@@ -78,7 +88,7 @@ onReady(() => {
 	squawkBox = document.querySelector('#squawk-box');
 	squawkURL = document.querySelector('#squawk_url');
 
-	document.querySelectorAll('.squawk-display').forEach(squawkCountdown);
+	document.querySelectorAll('.squawk-display').forEach(wireUpSquawkDisplay);
 
 	if (squawkForm) {
 		squawkForm.addEventListener('submit', submitSquawk);

@@ -71,3 +71,14 @@ export function formatTime (totalSeconds) {
 
 	return `${ hourDisplay }${ minuteDisplay }${ secondDisplay }`;
 }
+
+export function copyToClipboard (text) {
+	let textArea = document.createElement("textarea");
+	textArea.style.cssText = 'position: absolute !important; left: -9999px !important;';
+	textArea.value = text;
+
+	document.body.appendChild(textArea);
+	textArea.select();
+	document.execCommand('copy');
+	document.body.removeChild(textArea);
+}

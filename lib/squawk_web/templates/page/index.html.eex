@@ -13,8 +13,8 @@
   <%= if not Enum.empty?(@sqwks) do %>
     <div id="squawk-box">
       <%= for sqwk <- @sqwks do %>
-        <p class="squawk-display" data-expiration="<%= DateTime.to_unix(sqwk.expiration) * 1000 %>">
-          <strong><a href="<%= squawk_path(@conn, :show, sqwk.key) %>"><%= sqwk.key %></a></strong>: <a href="<%= sqwk.url %>"><%= sqwk.url %></a><span class="squawk-expiration"></span>
+        <p class="squawk-display" data-squawk="http://<%= @conn.host %><%= squawk_path(@conn, :show, sqwk.key) %>" data-expiration="<%= DateTime.to_unix(sqwk.expiration) * 1000 %>">
+        <strong><a href="<%= squawk_path(@conn, :show, sqwk.key) %>"><%= sqwk.key %></a></strong>: <a href="<%= sqwk.url %>"><%= sqwk.url %></a><span class="squawk-expiration"></span> <button type="button" class="btn btn-sm btn-info">Copy</button>
         </p>
       <% end %>
     </div>
