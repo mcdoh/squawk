@@ -4,6 +4,7 @@ import {squawkBoxTMPL, newKeyTMPL, squawkDisplayTMPL} from './templates.js';
 
 let squawkForm;
 let squawkBox;
+let squawkURL;
 
 function squawkCountdown (squawkDisplay) {
 	let expiration = parseInt(squawkDisplay.getAttribute('data-expiration'));
@@ -44,7 +45,7 @@ function squawkSuccess (data) {
 	let oldKey = document.querySelector('#new-key');
 	if (oldKey) remove(oldKey);
 
-	document.querySelector('#squawk_url').value = ''
+	squawkURL.value = '';
 
 	if (!squawkBox) {
 		insertAfter(squawkForm, squawkBoxTMPL());
@@ -67,14 +68,19 @@ function submitSquawk (event) {
 	let postURL = this.getAttribute('action');
 	let formData = new FormData(this);
 
-	postFormData(postURL, formData, squawkSuccess, squawkError);
+	if (squawkURL.value) {
+		postFormData(postURL, formData, squawkSuccess, squawkError);
+	}
 }
 
 onReady(() => {
 	squawkForm = document.querySelector('#squawk-form');
 	squawkBox = document.querySelector('#squawk-box');
+	squawkURL = document.querySelector('#squawk_url');
 
 	document.querySelectorAll('.squawk-display').forEach(squawkCountdown);
 
-	squawkForm.addEventListener('submit', submitSquawk);
+	if (squawkForm) {
+		squawkForm.addEventListener('submit', submitSquawk);
+	}
 });
