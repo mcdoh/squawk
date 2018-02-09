@@ -92,5 +92,6 @@ onReady(() => {
 
 	if (squawkForm) {
 		squawkForm.addEventListener('submit', submitSquawk);
+		squawkURL.focus();
 	}
 });
