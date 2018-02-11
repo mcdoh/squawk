@@ -20,3 +20,6 @@
     </div>
   <% end %>
 </div>
+<script>
+console.log("<%= @test.user %>");
+</script>
