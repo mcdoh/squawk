@@ -4,7 +4,10 @@ defmodule SquawkWeb.SquawkController do
 
   def create(conn, %{"squawk" => squawk_request}) do
     user_id = get_session(conn, :user_id)
-    user_ip = to_string(:inet_parse.ntoa(conn.remote_ip))
+
+    user_ip = conn
+    |> get_req_header("x-real-ip")
+    |> Enum.at(0)
 
     new_sqwk = squawk_request
                |> Map.put("user_id", user_id)
