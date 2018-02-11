@@ -3,8 +3,15 @@ defmodule SquawkWeb.SquawkController do
   alias Squawk.Nest
 
   def create(conn, %{"squawk" => squawk_request}) do
-    IO.puts "CREATE CREATE CREATE"
-	case Nest.create_squawk(squawk_request) do
+    user_id = get_session(conn, :user_id)
+    user_ip = to_string(:inet_parse.ntoa(conn.remote_ip))
+
+    new_sqwk = squawk_request
+               |> Map.put("user_id", user_id)
+               |> Map.put("user_ip", user_ip)
+               |> Nest.create_squawk
+
+	case new_sqwk do
 	  {:ok, sqwk} ->
         sqwks = get_session(conn, :sqwks) || []
         sqwks = [sqwk | sqwks]

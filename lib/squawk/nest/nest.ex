@@ -26,7 +26,12 @@ defmodule Squawk.Nest do
     if length(sqwks) > 0 do
       sqwks
       |> Enum.random
-      |> Sqwk.changeset(%{url: attrs["url"], expiration: create_expiration(attrs["ttl"])})
+      |> Sqwk.changeset(%{
+        url: attrs["url"],
+        expiration: create_expiration(attrs["ttl"]),
+        user_id: attrs["user_id"],
+        user_ip: attrs["user_ip"]
+      })
       |> Repo.update
     else
       {:error, :out_of_words}
