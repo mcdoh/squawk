@@ -16,11 +16,8 @@ defmodule SquawkWeb.SquawkController do
 
 	case new_sqwk do
 	  {:ok, sqwk} ->
-        sqwks = get_session(conn, :sqwks) || []
-        sqwks = [sqwk | sqwks]
-
         conn
-        |> put_session(:sqwks, sqwks)
+        |> put_session(:sqwks, [])
 		|> render("new.json", sqwk: sqwk)
 	  {:error, error} ->
 		render conn, "error.json", error: error

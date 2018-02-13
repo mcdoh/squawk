@@ -17,6 +17,13 @@ defmodule Squawk.Nest do
     |> Repo.one
   end
 
+  def get_user_squawks(user_id) do
+    Sqwk
+    |> where([s], s.user_id == ^user_id)
+    |> where([s], s.expiration > ^DateTime.utc_now)
+    |> Repo.all
+  end
+
   def create_squawk(attrs \\ %{}) do
     sqwks = Sqwk
            |> where([s], s.expiration < ^DateTime.utc_now)
