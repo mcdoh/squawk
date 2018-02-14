@@ -1,6 +1,7 @@
 defmodule SquawkWeb.SquawkController do
   use SquawkWeb, :controller
   alias Squawk.Nest
+  alias Squawk.Bird
 
   def create(conn, %{"squawk" => squawk_request}) do
     user_id = get_session(conn, :user_id)
@@ -16,6 +17,8 @@ defmodule SquawkWeb.SquawkController do
 
 	case new_sqwk do
 	  {:ok, sqwk} ->
+        Bird.increment_squawk_count(user_id)
+
         conn
         |> put_session(:sqwks, [])
 		|> render("new.json", sqwk: sqwk)
