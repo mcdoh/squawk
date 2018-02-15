@@ -2,7 +2,6 @@ defmodule SquawkWeb.Plugs.LoadUser do
   import Plug.Conn
   alias Squawk.Bird
   alias Squawk.Nest
-  alias Squawk.Nest.Sqwk
 
   def init(_opts), do: nil
 
