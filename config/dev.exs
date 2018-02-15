@@ -7,7 +7,7 @@ use Mix.Config
 # watchers to your application. For example, we use it
 # with brunch.io to recompile .js and .css sources.
 config :squawk, SquawkWeb.Endpoint,
-  http: [port: 4000, protocol_options: [max_header_name_length: 128, max_header_value_length: 8192, max_headers: 128]],
+  http: [port: 4000],
   debug_errors: true,
   code_reloader: true,
   check_origin: false,

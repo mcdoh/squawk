@@ -11,7 +11,7 @@ config :squawk,
 
 # Configures the endpoint
 config :squawk, SquawkWeb.Endpoint,
-  http: [port: 4000, protocol_options: [max_header_name_length: 128, max_header_value_length: 8192, max_headers: 128]],
+  http: [port: 4000],
   url: [host: "localhost"],
   secret_key_base: "jftoctplvaS9tP2c4AS2weMpOMWiMejZnbqlCglD7+XzqHS0gJBU5aUpgHiQ1NSL",
   render_errors: [view: SquawkWeb.ErrorView, accepts: ~w(html json)],
