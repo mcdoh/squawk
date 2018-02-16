@@ -37,7 +37,8 @@ defmodule Squawk.Nest do
         url: attrs["url"],
         expiration: create_expiration(attrs["ttl"]),
         user_id: attrs["user_id"],
-        user_ip: attrs["user_ip"]
+        user_ip: attrs["user_ip"],
+        ttl: String.to_integer(attrs["ttl"])
       })
       |> Repo.update
     else
