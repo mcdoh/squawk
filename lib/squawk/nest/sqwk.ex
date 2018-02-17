@@ -11,6 +11,7 @@ defmodule Squawk.Nest.Sqwk do
     field :user_id, :integer
     field :user_ip, :string
     field :ttl, :integer
+    field :host, :string
 
     timestamps()
   end
@@ -18,7 +19,7 @@ defmodule Squawk.Nest.Sqwk do
   @doc false
   def changeset(%Sqwk{} = sqwk, attrs) do
     sqwk
-    |> cast(attrs, [:key, :url, :expiration, :user_id, :user_ip, :ttl])
+    |> cast(attrs, [:key, :url, :expiration, :user_id, :user_ip, :ttl, :host])
     |> validate_required([:key, :url, :expiration])
   end
 end
