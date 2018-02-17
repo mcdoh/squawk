@@ -39,7 +39,8 @@ defmodule Squawk.Nest do
         user_id: attrs["user_id"],
         user_ip: attrs["user_ip"],
         ttl: String.to_integer(attrs["ttl"]),
-        host: URI.parse(attrs["url"]).host
+        host: URI.parse(attrs["url"]).host,
+        views: 0
       })
       |> Repo.update
     else
@@ -52,5 +53,18 @@ defmodule Squawk.Nest do
     |> DateTime.to_unix
     |> Kernel.+(String.to_integer(ttl) * @one_second)
     |> DateTime.from_unix!(:second)
+  end
+
+  def increment_squawk_views(key) do
+    sqwk = Sqwk
+    |> where([s], s.key == ^key)
+    |> lock("FOR UPDATE")
+    |> Repo.one
+
+    sqwk
+    |> Sqwk.changeset(%{
+      views: sqwk.views + 1
+    })
+    |> Repo.update!
   end
 end
