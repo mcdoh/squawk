@@ -20,7 +20,6 @@ defmodule SquawkWeb.SquawkController do
         Bird.increment_squawk_count(user_id)
 
         conn
-        |> put_session(:sqwks, [])
 		|> render("new.json", sqwk: sqwk)
 	  {:error, error} ->
 		render conn, "error.json", error: error
@@ -32,7 +31,7 @@ defmodule SquawkWeb.SquawkController do
 	  nil ->
 		render(conn, "error.html", error: :key_not_set, key: key)
 	  sqwk ->
-        Nest.increment_squawk_views(key)
+        Nest.increment_squawk_views(sqwk.id)
 		redirect(conn, external: sqwk.url)
 	end
   end
