@@ -1,6 +1,9 @@
 import 'phoenix_html';
-import {ONE_SECOND, copyToClipboard, createDomNode, insertAfter, formatTime, onReady, postFormData, prepend, remove} from './tools.js';
+import {ONE_SECOND, copyToClipboard, createDomNode, insertAfter, formatTime, onReady, postFormData, prepend, remove, validURL} from './tools.js';
 import {squawkBoxTMPL, newKeyTMPL, squawkDisplayTMPL} from './templates.js';
+
+let alertInfo;
+let alertDanger;
 
 let squawkForm;
 let squawkBox;
@@ -75,15 +78,25 @@ function squawkError (error) {
 function submitSquawk (event) {
 	event.preventDefault();
 
+	alertInfo.innerHTML = '';
+	alertDanger.innerHTML = '';
+
 	let postURL = this.getAttribute('action');
 	let formData = new FormData(this);
 
-	if (squawkURL.value) {
+	if (validURL(squawkURL.value)) {
 		postFormData(postURL, formData, squawkSuccess, squawkError);
+	}
+	else {
+		alertDanger.innerHTML = 'Please enter a valid and complete (i.e. "https://...") URL.';
+		squawkURL.focus();
 	}
 }
 
 onReady(() => {
+	alertInfo = document.querySelector('.alert-info');
+	alertDanger = document.querySelector('.alert-danger');
+
 	squawkForm = document.querySelector('#squawk-form');
 	squawkBox = document.querySelector('#squawk-box');
 	squawkURL = document.querySelector('#squawk_url');

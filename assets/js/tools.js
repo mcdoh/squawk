@@ -1,6 +1,12 @@
 export const ONE_SECOND = 1000;
 export const is200 = /^2\d\d$/;
 
+export const urlRE = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/;
+
+export function validURL (str) {
+	return urlRE.test(str);
+}
+
 export function createDomNode (htmlString) {
 	let host = document.createElement('div');
 	host.innerHTML = htmlString;
