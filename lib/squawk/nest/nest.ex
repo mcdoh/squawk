@@ -28,6 +28,7 @@ defmodule Squawk.Nest do
     Sqwk
     |> where([s], s.user_id == ^user_id)
     |> where([s], s.expiration > ^DateTime.utc_now)
+    |> order_by(desc: :inserted_at)
     |> Repo.all
   end
 
