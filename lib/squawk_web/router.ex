@@ -14,6 +14,18 @@ defmodule SquawkWeb.Router do
     plug :accepts, ["json"]
   end
 
+  scope "/admin", SquawkWeb.Admin, as: :admin do
+    pipe_through :browser
+
+    get "/magiclink", SessionController, :create
+  end
+
+  scope "/admin", SquawkWeb.Admin, as: :admin do
+    pipe_through [:browser, SquawkWeb.Plugs.LoadAdmin]
+
+    get "/", DashboardController, :index
+  end
+
   scope "/", SquawkWeb do
     pipe_through :browser # Use the default browser stack
 
