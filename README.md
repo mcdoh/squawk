@@ -1,5 +1,6 @@
 # Squawk!
 
+A short-term, short-url, that can be shajred with a word.
 [squawk.online](http://squawk.online)
 
 ## A shoutkey.com clone
