@@ -1,6 +1,6 @@
 # Squawk!
 
-A short-term, short-url, that can be shajred with a word.
+A short-term, short-url, that can be shared with a word.
 
 [squawk.online](http://squawk.online)
 
