@@ -11,3 +11,8 @@
 	font-size: 16px;
 }
 
+#buy-me-a-beer {
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+}
