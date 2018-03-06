@@ -1,6 +1,12 @@
-alias Squawk.{Nest, Bird, Repo}
+import  Ecto.Query
+
+alias Squawk.Repo
+
+alias Squawk.Nest
 alias Squawk.Nest.Sqwk
 alias Squawk.Nest.Key
+
+alias Squawk.Bird
 alias Squawk.Bird.User
 
 defmodule AdminTools do

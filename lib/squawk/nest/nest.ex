@@ -24,6 +24,18 @@ defmodule Squawk.Nest do
     end
   end
 
+  def get_key_usage do
+    %{
+      used: Key
+            |> where([k], k.expiration > ^DateTime.utc_now)
+            |> Repo.all
+            |> Enum.count,
+      total: Key
+             |> Repo.all
+             |> Enum.count
+    }
+  end
+
   def get_user_squawks(user_id) do
     Sqwk
     |> where([s], s.user_id == ^user_id)
