@@ -1,6 +1,9 @@
+avocado
 bacon
 cheese
+egg
 lettuce
 onion
+pickle
 tomato
 
