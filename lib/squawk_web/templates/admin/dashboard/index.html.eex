@@ -2,4 +2,5 @@
   <h1>Squawk Dashboard</h1>
   <p class="lead">Hello, <%= @admin.handle %>!</p>
   <div><%= @key_usage.used %>/<%= @key_usage.total %></div>
+  <div><%= @conn.host %></div>
 </div>

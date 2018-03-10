@@ -1,5 +1,5 @@
 <div class="jumbotron">
   <h1><%= @sqwk.key %></h1>
-  <p><a href="http://<%= @conn.host %>:<%= @conn.port %><%= squawk_path(@conn, :show, @sqwk.key) %>">http://<%= @conn.host %>:<%= @conn.port %><%= squawk_path(@conn, :show, @sqwk.key) %></a></p>
+  <p><a href="https://<%= @conn.host %>:<%= @conn.port %><%= squawk_path(@conn, :show, @sqwk.key) %>">https://<%= @conn.host %>:<%= @conn.port %><%= squawk_path(@conn, :show, @sqwk.key) %></a></p>
   <p class="lead"><%= link "Squawk again?", to: page_path(@conn, :index) %></p>
 </div>

@@ -1,7 +1,7 @@
 {
   "expiration": <%= DateTime.to_unix(@sqwk.expiration) * 1000 %>,
   "key": "<%= @sqwk.key %>",
-  "squawk": "http://<%= @conn.host %><%= squawk_path(@conn, :show, @sqwk.key) %>",
+  "squawk": "https://<%= @conn.host %><%= squawk_path(@conn, :show, @sqwk.key) %>",
   "url": "<%= @sqwk.url %>",
   "host": "<%= @sqwk.host %>"
 }
