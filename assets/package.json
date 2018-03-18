@@ -2,7 +2,7 @@
 	"repository": {},
 	"license": "MIT",
 	"scripts": {
-		"watch": "webpack --watch --color",
+		"watch": "webpack --watch --color --mode development",
 		"build:dev": "webpack --progress --colors --mode development",
 		"build:prod": "NODE_ENV=production webpack --progress --colors --mode production"
 	},
