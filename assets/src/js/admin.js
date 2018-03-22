@@ -1,1 +1,1 @@
-console.log('FUCK YOU, OLD MAN!!!');
+console.log('admin.js');
