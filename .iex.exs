@@ -29,7 +29,7 @@ defmodule AdminTools do
   def magiclink(handle) do
     case Bird.get_admin_by_handle!(handle) do
       nil -> "Error: #{ handle } is not an Admin. Try 'Admin.create_admin(\"#{ handle }\")"
-      admin ->
+      _admin ->
         token = Phoenix.Token.sign(SquawkWeb.Endpoint, "admin", handle)
         "http://squawk.online/admin/magiclink?token=#{ token }"
     end
